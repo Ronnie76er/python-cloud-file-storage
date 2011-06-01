@@ -1,0 +1,3 @@
+"""
+Base Plugin API
+"""
