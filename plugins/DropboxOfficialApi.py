@@ -1,10 +1,10 @@
 from BasePluginApi import BasePluginApi
-
+from dropbox import auth
 
 class DropboxOfficialApi(BasePluginApi):
     
-    def __init__(self):
-        print "init"
+    def __init__(self, configFilename):
+        self.configFilename = configFilename
     
     def authenticate(self):
-        print 'Not implemented'
+        self.config = auth.Authenticator.load_config(self.configFilename)
