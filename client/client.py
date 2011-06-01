@@ -14,4 +14,7 @@ class FileStorageClient:
     def setPlugin(self, plugin):
         self.plugin = plugin
         
+    def sendFile(self, name):
+        print 'Not implemented yet'
+        
         
