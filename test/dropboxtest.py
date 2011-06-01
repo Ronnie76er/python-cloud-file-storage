@@ -1,11 +1,12 @@
 import unittest
 from pythoncloudfilestorage.client.client import FileStorageClient
+from pythoncloudfilestorage.plugins.DropboxOfficialApi import DropboxOfficialApi
 
 class TestDropBox(unittest.TestCase):
     
     def testApi(self):
         self.assertTrue(True)
-        myClient = FileStorageClient()
+        myClient = FileStorageClient(DropboxOfficialApi())
         
         myClient.sendFile('testfile.txt')
         
