@@ -18,6 +18,12 @@ class FileStorageClient:
         self.plugin = plugin
         
     def sendFile(self, name):
-        print 'Not implemented yet'
+        return self.plugin.sendFile(name)
+
+    def getFile(self, name):
+        return self.plugin.getFile(name)
+        
+    def deleteFile(self, name):
+        return self.plugin.deleteFile(name)
         
         

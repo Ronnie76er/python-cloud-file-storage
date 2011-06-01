@@ -13,7 +13,17 @@ class TestDropBox(unittest.TestCase):
             assert key in api.config, "Key %s is not set in config/testing.ini." % key
 
         
-        myClient.sendFile('testfile.txt')
+        resp = myClient.sendFile('testfile.txt')
+        assert resp.status == 200
+        
+        resp = myClient.getFile('testfile.txt')
+        assert resp.status == 200
+        
+        resp = myClient.deleteFile('testfile.txt')
+        assert resp.status == 200
+        
+        resp = myClient.getFile('testfile.txt')
+        assert resp.status != 200
         
         
         
