@@ -1,0 +1,13 @@
+Beginnings of a common python API for cloud file storage solutions.
+
+Got a very simple dropbox plugin setup using the official python API from Dropbox.
+
+Planned support for:
+Dropbox
+Ubuntu One
+SpiderOak
+This was written before WWDC, but maybe iCloud or whatever?
+S3 (possibly using boto)
+SugarSync
+
+Let me know of others that you think would be a good fit.
