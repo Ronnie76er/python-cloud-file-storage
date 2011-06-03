@@ -18,9 +18,12 @@ class TestDropBox(unittest.TestCase):
         
         myClient = FileStorageClient(api)
         
-        for key in ['server', 'port', 'consumer_key', 'consumer_secret', 'verifier']:
-            assert key in api.config, "Key %s is not set in config/testing.ini." % key
-
+        print myClient.getAuthorizationUrl()
+        tmp = raw_input("Hit enter when you've authorized it")
+        
+        myClient.authenticate()
+        
+        
         
         resp = myClient.sendFile('testfile.txt')
         assert resp.status == 200

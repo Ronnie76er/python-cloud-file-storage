@@ -14,23 +14,21 @@ class DropboxOfficialApi():
     def __init__(self, consumer_key, consumer_secret, config):
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
-        self.config = config
+        self.authenticator = auth.Authenticator(config)
     
     def authenticate(self):
-        authenticator = auth.Authenticator(self.config)
-        
-        token = authenticator.obtain_request_token()
-        print authenticator.build_authorize_url(token)
-        
-        tmp = raw_input("Hit enter when you've authorized it")
-        
-        access_token = authenticator.obtain_access_token(token, None)
+        self.access_token = self.authenticator.obtain_access_token(self.token, None)
         
         self.client = client.DropboxClient(self.server,
                                            self.content_server,
                                            self.port,
-                                           authenticator,
-                                           access_token)
+                                           self.authenticator,
+                                           self.access_token)
+        
+    def getAuthorizationUrl(self):
+        self.token = self.authenticator.obtain_request_token()
+        return self.authenticator.build_authorize_url(self.token)
+        
         
     def requestAuthorization(self):
         print 'Something'

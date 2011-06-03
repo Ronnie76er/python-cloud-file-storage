@@ -7,12 +7,13 @@ class FileStorageClient:
     
     
     def __init__(self, plugin=None):
-        print "Testing"
         self.plugin = plugin
-        if self.plugin != None:
-            self.plugin.authenticate()
             
+    def getAuthorizationUrl(self):
+        return self.plugin.getAuthorizationUrl()
         
+    def authenticate(self):
+        return self.plugin.authenticate()
         
     def setPlugin(self, plugin):
         self.plugin = plugin
