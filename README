@@ -2,7 +2,7 @@ Beginnings of a common python API for cloud file storage solutions.
 
 Got a very simple dropbox plugin setup using the official python API from Dropbox.
 
-Planned support for:
+Suggested Planned support for:
 Dropbox
 Ubuntu One
 SpiderOak
