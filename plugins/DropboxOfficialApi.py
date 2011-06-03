@@ -1,13 +1,22 @@
-from BasePluginApi import BasePluginApi
 from dropbox import auth, client
 
-class DropboxOfficialApi(BasePluginApi):
+class DropboxOfficialApi():
     
-    def __init__(self, configFilename):
-        self.configFilename = configFilename
+    server = 'api.dropbox.com'
+    content_server = 'api-content.dropbox.com'
+    port = 80
+    
+    request_token_url = 'https://api.dropbox.com/0/oauth/request_token'
+    access_token_url = 'https://api.dropbox.com/0/oauth/access_token'
+    authorization_url = 'https://www.dropbox.com/0/oauth/authorize'
+    trusted_access_token_url = 'https://api.dropbox.com/0/token'
+
+    def __init__(self, consumer_key, consumer_secret, config):
+        self.consumer_key = consumer_key
+        self.consumer_secret = consumer_secret
+        self.config = config
     
     def authenticate(self):
-        self.config = auth.Authenticator.load_config(self.configFilename)
         authenticator = auth.Authenticator(self.config)
         
         token = authenticator.obtain_request_token()
@@ -15,15 +24,16 @@ class DropboxOfficialApi(BasePluginApi):
         
         tmp = raw_input("Hit enter when you've authorized it")
         
-        access_token = authenticator.obtain_access_token(token, self.config['verifier'])
+        access_token = authenticator.obtain_access_token(token, None)
         
-        print access_token
-        
-        self.client = client.DropboxClient(self.config['server'],
-                                           self.config['content_server'],
-                                           self.config['port'],
+        self.client = client.DropboxClient(self.server,
+                                           self.content_server,
+                                           self.port,
                                            authenticator,
                                            access_token)
+        
+    def requestAuthorization(self):
+        print 'Something'
         
     def sendFile(self, filename):
         f = open(filename)
@@ -38,4 +48,5 @@ class DropboxOfficialApi(BasePluginApi):
     def deleteFile(self, filename):
         resp = self.client.file_delete('dropbox', '/' + filename)
         return resp
+    
         
