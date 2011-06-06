@@ -18,17 +18,30 @@ class DropboxOfficialApi():
     
     def authenticate(self):
         self.access_token = self.authenticator.obtain_access_token(self.token, None)
-        
+        self.createClient()
+    
+    def createClient(self):
         self.client = client.DropboxClient(self.server,
-                                           self.content_server,
-                                           self.port,
-                                           self.authenticator,
-                                           self.access_token)
-        
+                        self.content_server,
+                        self.port,
+                        self.authenticator,
+                        self.access_token)
+
     def getAuthorizationUrl(self):
         self.token = self.authenticator.obtain_request_token()
         return self.authenticator.build_authorize_url(self.token)
         
+    def getToken(self):
+        return self.token
+    
+    def setToken(self, token):
+        self.token = token
+    
+    def getAccessToken(self):
+        return self.access_token
+    
+    def setAccessToken(self, access_token):
+        self.access_token = access_token
         
     def requestAuthorization(self):
         print 'Something'
